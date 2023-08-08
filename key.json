@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "joyboy-online-gallery",
+  "private_key_id": "b5a4a2597073e3f6c2292ebb38d2c258e0a3714e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDjoGGWaVsqaCrb\nkaLLL38toQ2Z7n7Qr5cz4RGCbyKpq0iCZ6BW7WLos8ungi8hKctNDya+52ThRucs\nFXsg8noOs9AgEpylOjGx5kfK5UfogiOWo67S5a3a7oFU2mqnzLsyUlM5jPofT8vV\n+DkWq+ddMrw8Fdd2TQVggKteh1XgycxFWvHmhcnpIfpNAmWn2QKaYPO6Q/mfBtTI\na+olH5DdyApFHc50oSCEyw4uxtbh9Rd4uyuWXjnJLSFUL95Y0O7p0iyd8bxx/UCI\nHcOkNVE/sZ2RBB9g90cwFJdeiy2/qr7UYKIl+yvdHWK66if65/vJhni+U1deEJZy\nXNdYPcXJAgMBAAECggEAMOAnFBzbLmffi/Xhdq9kJ3AFc5/6KuUJGmKhV9h1IOle\nUGHf08p1CnJQsE8Lv5sxxAIU17jnuFd5G8YhAhoOi0mgzsIwUGoGcaR4leBVaF9J\nNPdAephGlFPSAV5EuHMFXvC+XgUfT8nagr8hwvR2YVSbhmtKMGSpWudF5K46imFi\nbAppejIT7MST18tx3jznZPEs5lZCYdo2ECTA5ZX9AvmfaHBZn0P96cpG47p6GhNn\ncJJXu+Hzg/D261XIog3COpTZfbZrXzmr+ZEDYEasUbEPIMxZ6l9Rc7urxMiTJGXn\n9yR8p/+PGK4ITrcrVN4ZSHLurgU/GDA36yMVi/Tt4QKBgQD82rn9rA16UnAiarQc\nSpPgj6YqrXUT4GRdpcAeM25zK5it/6G+xKmWVS1kDu1ynqVcJWXHKcg87TjcOzAS\nPKc7I7AP1UXGZgTv2u/I1fQJa6IXXKrOxscEyXQjMkahlkviFBF4WuwKz3tH/gYd\n72TnHTBQkmkvxGEvVJNBoiYXawKBgQDmdU9/kbpGARLCjlgB3/wdyaoD2x9dz5Q0\nSn8+Szew0RBRUZGQNCh92w4nCBoMtlTMR/MA6LLQp3qxvFoajrre2MdeX+L0V9lB\n6xZ1UxfdSdkUEcsTWrY6xwZWxCEu7WPgcX4aSN9Dio5wX3cj4I1ykjVtSM4eVSZO\nBd1djSbImwKBgQDg0SEZmQaKwg2NrE3j8bM1sMNPotY8DAFw+lStBZGouRSRcH7B\nfV5Dmgw3sMYSaVgha+bohA/TjCBIQB/ntyIBhSOfkELvufmdwY39ha3rSlXea7g7\nDaYabXvjZ2pBdb6Wjr1Rw5Wnrv6v7f5GU3nlu6Afo23+2J6IVKxxaNhxbQKBgClk\napn0F6vZJ4BwRphXnZXQEcxNgA2+adUWiFIs+ly0wCSK7QUkiR1Jyfnyt5MO8J4c\nUiYYpX1ah2wC84APoLrD3tMxj7bpTGlNiyQZf5DMYcP8Cih4w4A9HQNaiMc/9g9q\n8wZPjmI4Mas3SlPUUjOA1T3CtNq32oBrBz51SsD/AoGBAOHgkHsVE3jdivhccKqJ\nlr6ZZZFAtUsnfaLgFCXrETVbtevbro2mqKiiEYp2/xvaEMf1GS0yl5REI+kvL/TY\nF6hEeGdxZPVkg1NmtROUStj7djkpcrzAPnGTy8+NXwT2v9VH3JNfWe3EMuu13Adk\nfqgAwRQsArb3B54Au6x3Aweq\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-4ub15@joyboy-online-gallery.iam.gserviceaccount.com",
+  "client_id": "114527215907863955240",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-4ub15%40joyboy-online-gallery.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
