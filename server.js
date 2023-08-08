@@ -11,6 +11,7 @@ const admin = require("firebase-admin");
 const credentials = require("./key.json");
 admin.initializeApp({
   credential: admin.credential.cert(credentials),
+  storageBucket: "gs://joyboy-online-gallery.appspot.com/",
 });
 
 //API Middlewares
