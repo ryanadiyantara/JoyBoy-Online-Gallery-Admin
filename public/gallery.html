@@ -20,6 +20,7 @@
 
   <body class="g-sidenav-show bg-gray-100">
     <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    <!-- Menu Samping Kiri -->
     <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4" id="sidenav-main">
       <div class="sidenav-header">
         <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -88,7 +89,7 @@
           </div>
         </div>
       </nav>
-      <!-- End Navbar -->
+
       <div class="container-fluid py-4">
         <div class="row">
           <div class="col-12">
@@ -99,23 +100,9 @@
               <div class="card-body px-4">
                 <div class="row g-4 align-items-center">
                   <div class="col-md-12">
-                    <!-- Fetch -->
                     <ul class="list-group" id="galleryList">
-                      <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg align-items-center">
-                        <div>
-                          <img src="../assets/img/team-3.jpg" class="avatar avatar-sm-photo me-3" alt="user1" />
-                        </div>
-                        <div class="d-flex flex-column w-75">
-                          <h6 class="mb-3 text-sm">Oliver Liam</h6>
-                          <span class="mb-2 text-xs text-dark font-weight-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, amet!.</span>
-                        </div>
-                        <div class="w-25 ms-auto text-end">
-                          <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                        </div>
-                      </li>
+                      <!-- Fetch Data Gallery-->
                     </ul>
-                    <!-- Fetch End-->
                   </div>
                 </div>
               </div>
@@ -136,33 +123,36 @@
     </main>
 
     <!-- Overlay -->
+    <!-- Update Data -->
     <div class="modal fade" id="addPhotoModal" tabindex="-1" aria-labelledby="addPhotoModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="col-lg-12">
             <div class="card">
-              <form action="/create/photo" method="post" enctype="multipart/form-data">
+              <!-- Form - (Update Foto) -->
+              <form action="/update/photos" method="post" enctype="multipart/form-data">
                 <div class="card-header pb-0 p-3">
                   <h6 class="mb-0">Update Photo Detail</h6>
                 </div>
                 <div class="card-body">
+                  <input type="text" id="idUpdate" name="idUpdate" hidden />
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Title</label>
-                        <input class="form-control" type="text" id="title" name="title" placeholder="Title" required />
+                        <input class="form-control" type="text" id="titleUpdate" name="titleUpdate" placeholder="Title" value="" required />
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="form-control-label" for="photoUpload">Choose Photo</label>
-                    <input type="file" class="form-control" id="imageURL" name="file" />
+                    <label class="form-control-label" for="photoUpdate">Choose Photo</label>
+                    <input type="file" class="form-control" id="imageURLUpdate" name="file" />
                   </div>
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Description</label>
-                        <textarea class="form-control" id="description" name="description" placeholder="Description" required></textarea>
+                        <textarea class="form-control" id="descriptionUpdate" name="descriptionUpdate" placeholder="Description" value="" required></textarea>
                       </div>
                     </div>
                   </div>
@@ -179,13 +169,8 @@
       </div>
     </div>
 
-    <!--   Core JS Files   -->
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
-    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-
-    <!-- Fetch Data -->
+    <!-- Script Fetch Data -->
+    <!-- Read + Delete + Read for Edit Data -->
     <script>
       // Load Foto
       async function fetchPhotos() {
@@ -204,13 +189,13 @@
               <span class="mb-2 text-xs text-dark font-weight-bold">${gallery.description}</span>
             </div>
             <div class="w-25 ms-auto text-end">
-              <a data-galleryid="${gallery.id}" class="btn btn-link text-dark px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#addPhotoModal"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+              <button data-galleryid="${gallery.id}" data-gallerytitle="${gallery.title}" data-gallerydescription="${gallery.description}" class="btn btn-link text-dark px-3 mb-0 editButton" href="javascript:;" data-bs-toggle="modal" data-bs-target="#addPhotoModal"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</button>
               <button data-galleryid="${gallery.id}" class="btn btn-link text-danger text-gradient px-3 mb-0 deleteButton" type="button"><i class="far fa-trash-alt me-2"></i>Delete</button>
             </div>
           `;
           photoList.appendChild(photoDiv);
 
-          // Delete Data
+          // Delete Data Button
           const deleteButton = photoDiv.querySelector(".deleteButton");
           deleteButton.addEventListener("click", async () => {
             const galleryId = deleteButton.getAttribute("data-galleryid");
@@ -223,7 +208,26 @@
                 console.error(data.message);
               }
             } catch (error) {
-              console.error("errot occurred:", error.message);
+              console.error("error occurred:", error.message);
+            }
+          });
+
+          // Read for Edit Data Button
+          const editButton = photoDiv.querySelector(".editButton");
+          editButton.addEventListener("click", function (event) {
+            const target = event.target;
+            if (target.classList.contains("editButton")) {
+              const editGalleryId = target.getAttribute("data-galleryid");
+              const editGalleryTitle = target.getAttribute("data-gallerytitle");
+              const editGalleryDescription = target.getAttribute("data-gallerydescription");
+
+              const inputEditId = document.getElementById("idUpdate");
+              const inputEditTitle = document.getElementById("titleUpdate");
+              const inputEditDescription = document.getElementById("descriptionUpdate");
+
+              inputEditId.value = editGalleryId;
+              inputEditTitle.value = editGalleryTitle;
+              inputEditDescription.value = editGalleryDescription;
             }
           });
         });
@@ -231,7 +235,13 @@
       fetchPhotos();
     </script>
 
-    <!-- - -->
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+
+    <!-- Sidenav Mobile -->
     <script>
       var win = navigator.platform.indexOf("Win") > -1;
       if (win && document.querySelector("#sidenav-scrollbar")) {

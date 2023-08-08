@@ -22,12 +22,15 @@ app.use(express.static("public")); // Baca Direktori Page
 app.get("/form", (req, res) => {
   res.sendFile(__dirname + "/public/index.html"); // Baca Direktori Page
 });
+app.get("/gallery", (req, res) => {
+  res.sendFile(__dirname + "/public/gallery.html");
+});
 
 // Simple
 const db = admin.firestore();
 
 // Create-Photo
-app.post("/create/photo", (req, res) => {
+app.post("/create/photos", (req, res) => {
   upload(req, res, async (err) => {
     if (err) {
       return res.status(400).send("Error uploading file");
@@ -67,7 +70,7 @@ app.post("/create/photo", (req, res) => {
       await response.update({ imageURL: imageURL });
 
       // Eksekusi
-      res.send(response);
+      res.redirect("/form");
     } catch (error) {
       res.status(500).send(error.message);
     }
@@ -98,10 +101,57 @@ app.get("/read/photos", async (req, res) => {
   }
 });
 
+// Update-Photo
+app.post("/update/photos", (req, res) => {
+  upload(req, res, async (err) => {
+    if (err) {
+      return res.status(400).send("Error uploading file");
+    }
+    try {
+      // Menampilkan Data Text + File Input Dari Form
+      console.log(req.body);
+      console.log(req.file);
+
+      // Ngambil Id + Data Waktu
+      const photoId = req.body.idUpdate;
+      const newtimeStamp = admin.firestore.FieldValue.serverTimestamp();
+
+      // Upload gambar ke Firebase Storage
+      const bucket = admin.storage().bucket();
+      const file = req.file;
+      const fileRef = bucket.file(`${file.originalname}`);
+      await fileRef.save(file.buffer);
+
+      // Mendapatkan URL gambar dari Firebase Storage
+      const imageURLUpdate = await fileRef.getSignedUrl({
+        action: "read",
+        expires: "01-01-2030",
+      });
+
+      // Ngumpulin data baru Input
+      const newPhoto = {
+        title: req.body.titleUpdate,
+        description: req.body.descriptionUpdate,
+        imageURL: imageURLUpdate,
+        timeStamp: newtimeStamp,
+      };
+
+      // Eksekusi
+      await db.collection("gallery").doc(photoId).update(newPhoto);
+
+      res.redirect("/gallery");
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  });
+});
+
 //Delete Photo
 app.delete("/delete/:id", async (req, res) => {
   try {
+    // Hapus Data Firestore
     const response = await db.collection("gallery").doc(req.params.id).delete();
+
     res.send(response);
   } catch (error) {
     res.send(error);

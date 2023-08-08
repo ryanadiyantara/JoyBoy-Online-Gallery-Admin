@@ -139,10 +139,10 @@
         </div>
         <!-- Form + Recently Added -->
         <div class="row mt-4">
-          <!-- Form - (Create Foto Baru) -->
+          <!-- Form - (Create Foto) -->
           <div class="col-lg-7">
             <div class="card">
-              <form action="/create/photo" method="post" enctype="multipart/form-data">
+              <form action="/create/photos" method="post" enctype="multipart/form-data">
                 <div class="card-header pb-0 p-3">
                   <h6 class="mb-0">Upload a New Photo</h6>
                 </div>
@@ -203,13 +203,8 @@
       </div>
     </main>
 
-    <!--   Core JS Files   -->
-    <script src="../assets/js/core/popper.min.js"></script>
-    <script src="../assets/js/core/bootstrap.min.js"></script>
-    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-
-    <!-- Fetch Data -->
+    <!-- Script Fetch Data -->
+    <!-- Read -->
     <script>
       // Load Foto
       async function fetchPhotos() {
@@ -239,5 +234,32 @@
 
       fetchPhotos();
     </script>
+
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+
+    <!-- Sidenav Mobile -->
+    <script>
+      var win = navigator.platform.indexOf("Win") > -1;
+      if (win && document.querySelector("#sidenav-scrollbar")) {
+        var options = {
+          damping: "0.5",
+        };
+        Scrollbar.init(document.querySelector("#sidenav-scrollbar"), options);
+      }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
