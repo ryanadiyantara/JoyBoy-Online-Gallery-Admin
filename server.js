@@ -28,6 +28,7 @@ app.get("/gallery", (req, res) => {
 
 // Simple
 const db = admin.firestore();
+const auth = admin.auth();
 
 // Create-Photo
 app.post("/create/photos", (req, res) => {
@@ -174,24 +175,41 @@ app.delete("/delete/:id", async (req, res) => {
 //   res.json(userResponse);
 // });
 
-// Login Admin Gabisa
-// app.post("/login", (req, res) => {
-//   const adminCredentials = {
-//     username: "superadmin",
-//     password: "admin123",
-//   };
-//   const user = {
-//     email: req.body.email,
-//     password: req.body.password,
-//   };
+// Read Total Photo
+app.get("/gallery/count", async (req, res) => {
+  try {
+    const snapshot = await db.collection("gallery").get();
+    const totalPhotos = snapshot.size;
+    res.send({ totalPhotos });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
 
-//   if (user.email === adminCredentials.username && user.password === adminCredentials.password) {
-//     // Successful login
-//     res.redirect("./pages.dashboard.html"); // Redirect to the dashboard or desired page
-//   } else {
-//     res.status(401).send("Invalid Credentials");
-//   }
-// });
+// Read Total User
+app.get("/users/count", async (req, res) => {
+  try {
+    const userRecords = await auth.listUsers();
+    const totalUsers = userRecords.users.length;
+    res.send({ totalUsers });
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
+app.get("/users", async (req, res) => {
+  try {
+    const userRecords = await auth.listUsers();
+    const users = userRecords.users.map((user) => ({
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+    }));
+    res.send(users);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
 
 //Port Test Lokal
 const PORT = process.env.PORT || 8080;

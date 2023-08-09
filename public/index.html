@@ -102,8 +102,7 @@
                     <div class="numbers" id="totalCount">
                       <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Photos</p>
                       <!-- Fetch -->
-                      <h5 class="font-weight-bolder" id="">150</h5>
-                      <!-- Fetch -->
+                      <h5 class="font-weight-bolder" id="totalPhoto"></h5>
                     </div>
                   </div>
                   <div class="col-4 text-end">
@@ -123,8 +122,7 @@
                     <div class="numbers">
                       <p class="text-sm mb-0 text-uppercase font-weight-bold">Today's Users</p>
                       <!-- Fetch -->
-                      <h5 class="font-weight-bolder">15</h5>
-                      <!-- Fetch -->
+                      <h5 class="font-weight-bolder" id="totalUsers"></h5>
                     </div>
                   </div>
                   <div class="col-4 text-end">
@@ -231,8 +229,31 @@
           photoList.appendChild(photoDiv);
         }
       }
-
       fetchPhotos();
+
+      // Read Total Photo
+      fetch("/gallery/count")
+        .then((response) => response.json())
+        .then((data) => {
+          // Menampilkan jumlah total pengguna di halaman
+          const totalPhotosElement = document.getElementById("totalPhoto");
+          totalPhotosElement.textContent = data.totalPhotos;
+        })
+        .catch((error) => {
+          console.error("Error fetching total photo:", error);
+        });
+
+      // Read Total Users
+      fetch("/users/count")
+        .then((response) => response.json())
+        .then((data) => {
+          // Menampilkan jumlah total pengguna di halaman
+          const totalUsersElement = document.getElementById("totalUsers");
+          totalUsersElement.textContent = data.totalUsers;
+        })
+        .catch((error) => {
+          console.error("Error fetching total users:", error);
+        });
     </script>
 
     <!--   Core JS Files   -->
